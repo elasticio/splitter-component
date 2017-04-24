@@ -13,27 +13,19 @@
   "results": [
     [
       "data",
-      {
-        "userNames":"John"
-      }
+      "John"
     ],
     [
       "data",
-      {
-        "userNames":"Mike"
-      }
+      "Mike"
     ],
     [
       "data",
-      {
-        "userNames":"Anna"
-      }
+      "Anna"
     ],
     [
       "data",
-      {
-        "userNames":"Monica"
-      }
+      "Monica"
     ],
     [ "end" ]
     ]

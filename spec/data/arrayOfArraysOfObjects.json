@@ -43,66 +43,36 @@
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "John",
-          "friends": {
-            "name":"George",
-            "friendsCount": 30
-          }
-        }
+        "name":"George",
+        "friendsCount": 30
       }
     ],
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "John",
-          "friends": {
-            "name":"Logan",
-            "friendsCount": 100
-          }
-        }
+        "name":"Logan",
+        "friendsCount": 100
       }
     ],
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": {
-            "name":"Michael",
-            "friendsCount": 35
-          }
-        }
+        "name":"Michael",
+        "friendsCount": 35
       }
     ],
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": {
-            "name":"Monica",
-            "friendsCount": 220
-          }
-        }
+        "name":"Monica",
+        "friendsCount": 220
       }
     ],
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": {
-            "name":"Anna",
-            "friendsCount": 400
-          }
-        }
+        "name":"Anna",
+        "friendsCount": 400
       }
     ],
     [ "end" ]

@@ -19,19 +19,13 @@
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "John"
-        }
+        "name": "John"
       }
     ],
     [
       "data",
       {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike"
-        }
+        "name": "Mike"
       }
     ],
     [ "end" ]

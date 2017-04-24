@@ -74,9 +74,9 @@ function doSplit(path, root, index) {
     }
 
     // Resulting array
-    let currentPath = path.slice(0, index + 1);
+    let currentPath = path[index];
     // Getting value on the path
-    let array = _.get(root, currentPath.join('.'));
+    let array = root[currentPath];
     if (!array) {
         // Can't find next value along the path
         // will just return latest value
@@ -93,15 +93,17 @@ function doSplit(path, root, index) {
     let results = [];
     // We have a value and it's an Array
     array.forEach((arrayValue) => {
-        // Clone root
-        let result = clone(root);
-        // Replace array with one of it's values
-        _.set(result, currentPath, clone(arrayValue));
-        // Do next iteration and store results
-        let nextResult = doSplit(path, result, index + 1);
-        if (nextResult) {
-            results = results.concat(nextResult);
+
+        let result = arrayValue;
+
+        if (index < path.length) {
+
+            result = doSplit(path, result, index + 1);
+
         }
+
+        results = results.concat(result);
+
     });
 
     return results;
@@ -134,8 +136,10 @@ function cutByMaxSplittingLevel(path, splittingLevel) {
 
 
 function splitMessage(message, splitting, splittingLevel) {
+
     let loopPath = splitting.split('.');
     loopPath = cutByMaxSplittingLevel(loopPath, splittingLevel);
+
 
     let results = [];
     let res = doSplit(loopPath, message);

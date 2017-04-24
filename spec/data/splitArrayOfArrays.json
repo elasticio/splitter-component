@@ -20,53 +20,23 @@
   "results": [
     [
       "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "John",
-          "friends": "George"
-        }
-      }
+      "George"
     ],
     [
       "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "John",
-          "friends": "Logan"
-        }
-      }
+      "Logan"
     ],
     [
       "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": "Michael"
-        }
-      }
+      "Michael"
     ],
     [
       "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": "Monica"
-        }
-      }
+      "Monica"
     ],
     [
       "data",
-      {
-        "usersCount": 2,
-        "users":{
-          "name": "Mike",
-          "friends": "Anna"
-        }
-      }
+      "Anna"
     ],
     [ "end" ]
   ]

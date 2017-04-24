@@ -29,36 +29,16 @@
   },
   "results": [
     {
-      "users": {
-        "name": "John",
-        "friends": {
-          "name": "Mike"
-        }
-      }
+      "name": "Mike"
     },
     {
-      "users": {
-        "name": "John",
-        "friends": {
-          "name": "Monica"
-        }
-      }
+      "name": "Monica"
     },
     {
-      "users": {
-        "name": "Michael",
-        "friends": {
-          "name": "Anna"
-        }
-      }
+      "name": "Anna"
     },
     {
-      "users": {
-        "name": "Michael",
-        "friends": {
-          "name": "George"
-        }
-      }
+      "name": "George"
     }
   ]
 }

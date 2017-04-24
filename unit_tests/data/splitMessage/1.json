@@ -1,5 +1,5 @@
 {
-  "splitting": "users[*].name",
+  "splitting": "users[*]",
   "splittingLevel": 1,
   "body": {
     "users": [
@@ -10,9 +10,7 @@
   },
   "results": [
     {
-      "users": {
-        "name": "John"
-      }
+      "name": "John"
     }
   ]
 }
