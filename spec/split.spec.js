@@ -14,9 +14,9 @@ describe('Splitter ', () => {
     });
 
     for (const key of Object.keys(data)) {
-        it(key, () => {
+        it(key, async () => {
             const { message, config, results } = data[key];
-            splitter.process.call(self, message, config);
+            await splitter.process.call(self, message, config);
             for (let i = 0; i < results.length; i++) {
                 const args = self.emit.getCall(i).args;
 
