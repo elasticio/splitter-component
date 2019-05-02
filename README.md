@@ -47,3 +47,6 @@ The splitting expression is "users", action will return output:
 ## Known limitations (common for the component)
 No.
 
+## Documentation links
+More information and some examples can be found here: [Splitter documentation](https://www.elastic.io/connectors/splitter-integration/)
+and here: [Array splitting and JSONata mapper](https://support.elastic.io/support/solutions/articles/14000069604-array-splitting-and-jsonata-mapper)
