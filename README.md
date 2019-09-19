@@ -1,5 +1,6 @@
+[![CircleCI](https://circleci.com/gh/elasticio/splitter-component/tree/master.svg?style=svg)](https://circleci.com/gh/elasticio/splitter-component/tree/master)
 # splitter-component
-Splitter is the basic component for the [elastic.io platform](http://www.elastic.io)
+Splitter is the basic component for the [elastic.io platform](http://www.elastic.io).
 
 ## Description
 The Splitter processes income messages containing multiple elements that might have to be processed in different ways. The Splitter emits out the composite message into individual messages, each containing data related to one item.
