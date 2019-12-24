@@ -8,6 +8,8 @@ The Splitter processes income messages containing multiple elements that might h
 #### Environment variables 
 Component does not have any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` in order to avoid `Component run out of memory and terminated` error, recommended value of allocated memory is `512` MB.
 
+For debugging purposes there is: `LOG_LEVEL` - `trace` | `debug` | `info` | `warning` | `error` that controls logger level.
+
 ## Actions
 ### Split Message By Array
 **This action is deprecated, please use Split on JSONata Expression instead.**

@@ -1,4 +1,3 @@
-const debug = require('debug')('splitter');
 const _ = require('lodash');
 const { messages } = require('elasticio-node');
 
@@ -7,8 +6,8 @@ async function processAction(msg, conf) {
     const splitting = conf.splitter || {};
     const body = msg.body || {};
 
-    debug('Received new message with body: %j', body);
-    debug('Config: %j', conf);
+    this.logger.debug('Received new message with body: %j', body);
+    this.logger.debug('Config: %j', conf);
 
     const split = splitting === '$' ? body : _.get(body, splitting);
 
@@ -32,11 +31,11 @@ async function processAction(msg, conf) {
     if (_.isArray(split)) {
         split.forEach((elem) => results.push(elem));
     } else if (_.isObject(split)) {
-        debug(`"${splitting}" is not an array. Returning the original object`);
+        this.logger.debug(`"${splitting}" is not an array. Returning the original object`);
         results.push(split);
     }
 
-    debug('%s parts to emit found', results.length);
+    this.logger.debug('%s parts to emit found', results.length);
     results.forEach(async (result) => {
         if (result) {
             await this.emit('data', messages.newMessageWithBody(result));

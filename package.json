@@ -1,10 +1,10 @@
 {
   "name": "@elasticio/splitter",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "elastic.io component for splitting incoming messages",
   "scripts": {
     "pretest": "eslint split.js lib spec --fix",
-    "test": "mocha unit_tests spec/split spec/splitOnJsonata"
+    "test": "mocha spec/split spec/splitOnJsonata"
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,8 @@
   },
   "dependencies": {
     "@elastic.io/component-commons-library": "0.0.4",
-    "debug": "2.6.3",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.5.1",
+    "elasticio-sailor-nodejs": "2.5.4",
     "lodash": "4.17.4"
   },
   "devDependencies": {
