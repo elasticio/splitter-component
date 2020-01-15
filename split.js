@@ -35,7 +35,7 @@ async function processAction(msg, conf) {
         results.push(split);
     }
 
-    this.logger.debug('%s parts to emit found', results.length);
+    this.logger.info('Splitting the incoming message into %s messages', results.length);
     results.forEach(async (result) => {
         if (result) {
             await this.emit('data', messages.newMessageWithBody(result));
