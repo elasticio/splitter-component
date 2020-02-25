@@ -1,3 +1,6 @@
+## 1.0.5 (February 25, 2020)
+* Fixed bug when emitting to much data
+
 ## 1.0.4 (February 03, 2020)
 
 * Fixed bug with incorrect await while emitting data
