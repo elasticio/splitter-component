@@ -1,3 +1,6 @@
+## 1.0.6 (March 23, 2020)
+* Add support for new getFlowVariables and handlePathrough jsonata functions
+
 ## 1.0.5 (March 3, 2020)
 * Fixed bug when emitting to much data
 

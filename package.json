@@ -16,7 +16,7 @@
     "node": "12"
   },
   "dependencies": {
-    "@elastic.io/component-commons-library": "0.0.7",
+    "@elastic.io/component-commons-library": "1.1.0",
     "elasticio-node": "0.0.9",
     "elasticio-sailor-nodejs": "2.6.5",
     "lodash": "4.17.15"
