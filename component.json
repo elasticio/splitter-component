@@ -27,6 +27,38 @@
           "viewClass": "JSONataView"
         }
       }
+    },
+    "reassemble": {
+      "title": "Re-assemble Messages",
+      "help": {
+        "description": "Inverse operation from split: Re-assemble a group of messages that have previously been split",
+        "link": "#"
+      },
+      "main": "./lib/actions/reassemble.js",
+      "fields": {},
+      "metadata": {
+        "in": {
+          "type": "object",
+          "required": true,
+          "properties": {
+            "groupSize": {
+              "type": "number",
+              "required": true,
+              "title": "Number of messages produced by splitter"
+            },
+            "groupId": {
+              "type": "string",
+              "required": true,
+              "title": "Unique ID to describe the group"
+            },
+            "messageId": {
+              "type": "string",
+              "required": true,
+              "title": "Unique ID to describe this message"
+            }
+          }
+        }
+      }
     }
   }
 }
