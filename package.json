@@ -4,7 +4,7 @@
   "description": "elastic.io component for splitting incoming messages",
   "scripts": {
     "pretest": "eslint split.js lib spec --fix",
-    "test": "mocha spec/split spec/splitOnJsonata"
+    "test": "mocha spec/split spec/splitOnJsonata spec/"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@elastic.io/component-logger": "0.0.1",
     "chai": "3.5.0",
+    "chai-as-promised": "7.1.1",
     "eslint": "6.4.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.18.2",
