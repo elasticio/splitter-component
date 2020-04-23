@@ -94,7 +94,9 @@ and the JSONata expression `Phone.{type: number}`, an object constructor, the ac
 #### List of Expected Config fields
 ```Split Property``` - use this field to choose a separator.
 
-### Re-assemble Messages (Beta)
+### Re-assemble Messages 
+**(Beta)**
+
 Inverse of the split action: Given a stream of incoming messages that which have 
 been split apart by a split action (or similar), produce one message once all 
 message parts have arrived.

@@ -32,7 +32,7 @@
       "title": "Re-assemble Messages",
       "help": {
         "description": "Inverse operation from split: Re-assemble a group of messages that have previously been split",
-        "link": "#"
+        "link": "#re-assemble-messages"
       },
       "main": "./lib/actions/reassemble.js",
       "fields": {},
