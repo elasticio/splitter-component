@@ -1,5 +1,6 @@
 ## 1.1.0 (May 7, 2020)
 * Add re-assemble action
+* Update dependencies
 
 ## 1.0.6 (March 26, 2020)
 * Add support for new getFlowVariables and handlePathrough jsonata functions

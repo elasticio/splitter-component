@@ -16,19 +16,19 @@
     "node": "12"
   },
   "dependencies": {
-    "@elastic.io/component-commons-library": "1.1.0",
+    "@elastic.io/component-commons-library": "1.1.2",
     "elasticio-node": "0.0.9",
     "elasticio-sailor-nodejs": "2.6.5",
     "lodash": "4.17.15"
   },
   "devDependencies": {
     "@elastic.io/component-logger": "0.0.1",
-    "chai": "3.5.0",
+    "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
-    "eslint": "6.4.0",
-    "eslint-config-airbnb-base": "14.0.0",
-    "eslint-plugin-import": "2.18.2",
-    "mocha": "7.0.1",
-    "sinon": "2.1.0"
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-base": "14.1.0",
+    "eslint-plugin-import": "2.20.2",
+    "mocha": "7.1.1",
+    "sinon": "9.0.2"
   }
 }
