@@ -1,3 +1,6 @@
+## 1.1.1 (May 10, 2020)
+* Update sailor version to 2.6.7
+
 ## 1.1.0 (May 7, 2020)
 * Add re-assemble action
 * Update dependencies
