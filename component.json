@@ -6,7 +6,10 @@
     "split": {
       "deprecated": true,
       "title": "Split Message By Array",
-      "description": "This action is deprecated, please use Split on JSONata Expression instead.",
+      "help": {
+        "description": "This action is deprecated, please use Split on JSONata Expression instead.",
+        "link": "/components/splitter/index.html#split-message-by-array"
+      },
       "main": "./split.js",
       "fields": {
         "splitter": {
@@ -18,7 +21,10 @@
     },
     "splitOnJsonataExpression": {
       "title": "Split on JSONata Expression",
-      "description": "Evaluates the input based on a JSONata expression. Assuming the evaluation is an array, the array is split and emitted to multiple messages.",
+      "help": {
+        "description": "Evaluates the input based on a JSONata expression. Assuming the evaluation is an array, the array is split and emitted to multiple messages.",
+        "link": "/components/splitter/index.html#split-on-jsonata-expression"
+      },
       "main": "./lib/actions/splitOnJsonata.js",
       "fields": {
         "expression": {
@@ -32,7 +38,7 @@
       "title": "Re-assemble Messages",
       "help": {
         "description": "Inverse operation from split: Re-assemble a group of messages that have previously been split",
-        "link": "#re-assemble-messages"
+        "link": "/components/splitter/index.html#re-assemble-messages"
       },
       "main": "./lib/actions/reassemble.js",
       "fields": {},
