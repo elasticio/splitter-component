@@ -10,7 +10,7 @@
   "results": [
     [
       "error",
-      "The evaluated expression must be an array."
+      "Can't emit single primitive!"
     ]
   ]
 }

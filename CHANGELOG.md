@@ -1,3 +1,6 @@
+## 1.1.3 (August 20, 2020)
+* Adding possibility to emit non-array objects.
+
 ## 1.1.3 (August 11, 2020)
 * Update Sailor and dependencies.
 * Fix node version.

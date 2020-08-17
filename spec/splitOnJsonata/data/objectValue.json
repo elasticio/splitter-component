@@ -11,8 +11,10 @@
   },
   "results": [
     [
-      "error",
-      "The evaluated expression must be an array."
+      "data",
+      {
+        "name": "John"
+      }
     ]
   ]
 }
