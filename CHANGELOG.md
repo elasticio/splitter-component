@@ -1,5 +1,5 @@
 ## 1.1.4 (August 20, 2020)
-* Adding possibility to emit non-array objects.
+* `Split on JSONata Expression` action update: add possibility to emit non-array objects.
 
 ## 1.1.3 (August 11, 2020)
 * Update Sailor and dependencies.
