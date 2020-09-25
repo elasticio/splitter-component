@@ -1,3 +1,6 @@
+## 1.1.5 (September 25, 2020)
+* Remove sensitive data logging
+
 ## 1.1.4 (August 20, 2020)
 * `Split on JSONata Expression` action update: add possibility to emit non-array objects.
 
