@@ -1,5 +1,8 @@
+## 1.1.6 (October 20, 2020)
+* Update sailor version to 2.6.17
+
 ## 1.1.5 (September 25, 2020)
-* Remove sensitive data logging
+* Annual audit of the component code to check if it exposes a sensitive data in the logs
 
 ## 1.1.4 (August 20, 2020)
 * `Split on JSONata Expression` action update: add possibility to emit non-array objects.
