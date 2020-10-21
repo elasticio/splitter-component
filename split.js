@@ -6,8 +6,7 @@ async function processAction(msg, conf) {
   const splitting = conf.splitter || {};
   const body = msg.body || {};
 
-  this.logger.trace('Received new message with body: %j', body);
-  this.logger.trace('Splitting: %j', splitting);
+  this.logger.debug('Received new message');
 
   const split = splitting === '$' ? body : _.get(body, splitting);
 
@@ -31,7 +30,7 @@ async function processAction(msg, conf) {
   if (_.isArray(split)) {
     split.forEach((elem) => results.push(elem));
   } else if (_.isObject(split)) {
-    this.logger.trace(`"${splitting}" is not an array. Returning the original object`);
+    this.logger.debug('Splitting is not an array. Returning the original object');
     results.push(split);
   }
 
