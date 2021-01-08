@@ -26,9 +26,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run:
-        name: Installing Dependencies
-        command: npm install
+      - run: npm install
 
       - run:
         name: Audit Dependencies
