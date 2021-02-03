@@ -5,11 +5,6 @@ Splitter is the basic component for the [elastic.io platform](http://www.elastic
 ## Description
 The Splitter processes income messages containing multiple elements that might have to be processed in different ways. The Splitter emits out the composite message into individual messages, each containing data related to one item.
 
-#### Environment variables 
-Component does not have any required environment variables, but we suggest to use `EIO_REQUIRED_RAM_MB` in order to avoid `Component run out of memory and terminated` error, recommended value of allocated memory is `512` MB.
-
-For debugging purposes there is: `LOG_LEVEL` - `trace` | `debug` | `info` | `warning` | `error` that controls logger level.
-
 ## Actions
 ### Split Message By Array
 **This action is deprecated, please use Split on JSONata Expression instead.**
@@ -129,5 +124,4 @@ Must be unique per group but does not have to be globally unique. This value nee
 No.
 
 ## Documentation links
-More information and some examples can be found here: [Splitter documentation](https://www.elastic.io/connectors/splitter-integration/)
-and here: [Array splitting and JSONata mapper](https://support.elastic.io/support/solutions/articles/14000069604-array-splitting-and-jsonata-mapper)
+More information and some examples can be found here: [Splitter documentation](https://www.elastic.io/connectors/splitter-integration/).
