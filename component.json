@@ -1,5 +1,6 @@
 {
   "title": "Splitter",
+  "version": "1.1.10",
   "description": "Splits a message into multiple messages.",
   "buildType":"docker",
   "actions": {
@@ -61,6 +62,12 @@
               "type": "string",
               "required": true,
               "title": "Unique ID to describe this message"
+            },
+            "messageData": {
+              "title": "Message Data",
+              "required": false,
+              "type": "object",
+              "properties": {}
             }
           }
         }

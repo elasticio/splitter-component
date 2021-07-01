@@ -30,6 +30,7 @@ describe('Split on JSONata ', () => {
     expect(self.emit.lastCall.args[1].body).to.deep.equal({
       groupSize: 1,
       groupId: 'group123',
+      messageData: {},
     });
   });
 
@@ -69,6 +70,7 @@ describe('Split on JSONata ', () => {
           expect(self.emit.lastCall.args[1].body).to.deep.equal({
             groupSize: 2,
             groupId: '2',
+            messageData: {},
           });
           break;
         case 5:
@@ -76,9 +78,35 @@ describe('Split on JSONata ', () => {
           expect(self.emit.lastCall.args[1].body).to.deep.equal({
             groupSize: 3,
             groupId: '1',
+            messageData: {},
           });
           break;
       }
     }
+  });
+
+  it('Base Case: Group Size is 1, messageData is provided', async () => {
+    const msg = {
+      body: {
+        groupId: 'group123',
+        messageId: 'msg123',
+        groupSize: 1,
+        messageData: {
+          id: 1,
+        },
+      },
+    };
+    await reassemble.process.call(self, msg, {});
+    // eslint-disable-next-line no-unused-expressions
+    expect(self.emit.calledOnce).to.be.true;
+    expect(self.emit.lastCall.args[1].body).to.deep.equal({
+      groupSize: 1,
+      groupId: 'group123',
+      messageData: {
+        msg123: {
+          id: 1,
+        },
+      },
+    });
   });
 });

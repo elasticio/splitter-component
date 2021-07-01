@@ -1,3 +1,6 @@
+## 1.1.10 (July 9, 2021)
+* Add Ability to pass data from the individual messages to re-assembled message
+
 ## 1.1.9 (February 12, 2021)
 * Update sailor version to 2.6.24
 
