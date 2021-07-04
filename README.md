@@ -112,13 +112,16 @@ If at any point there is more than a 15 second gap in messages, then the group w
 * The group is dropped if there are any unexpected restarts to the container.
 * Size of the group must be known by all group members.
 * Messages are only emitter when all parts arrive. Emitting a message only when the first part arrives isn't supported.
-* The contents of data that are picked up by the sub-messages aren't passed forward to future steps.
 
 #### List of Expected Config fields
 ```groupSize``` - Number of messages in the group
+
 ```groupId``` - Globally unique id for the group to distinguish it from other groups. This value needs to be the same for all messages in a group.
+
 ```messageId``` - Id for a message to distinguish it from other messages in the group. 
 Must be unique per group but does not have to be globally unique. This value needs to be different for all messages in a group.
+
+```messageData``` - object for providing some data derived from the steps between splitting and re-assembling
 
 ## Known limitations (common for the component)
 No.
