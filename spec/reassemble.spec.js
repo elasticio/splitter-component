@@ -103,8 +103,10 @@ describe('Split on JSONata ', () => {
       groupSize: 1,
       groupId: 'group123',
       messageData: {
-        msg123: {
-          id: 1,
+        group123: {
+          msg123: {
+            id: 1,
+          },
         },
       },
     });
