@@ -30,7 +30,9 @@ describe('Split on JSONata ', () => {
     expect(self.emit.lastCall.args[1].body).to.deep.equal({
       groupSize: 1,
       groupId: 'group123',
-      messageData: {},
+      messageData: {
+        msg123: undefined,
+      },
     });
   });
 
