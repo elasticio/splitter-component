@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@elastic.io/component-commons-library": "1.1.4",
+    "@elastic.io/maester-client": "3.3.0-dev.1",
     "elasticio-node": "0.0.9",
     "elasticio-sailor-nodejs": "2.6.24",
     "lodash": "4.17.19"
@@ -28,6 +29,7 @@
     "eslint-config-airbnb-base": "14.2.0",
     "eslint-plugin-import": "2.22.0",
     "mocha": "8.1.1",
+    "nock": "12.0.3",
     "sinon": "9.0.3"
   }
 }

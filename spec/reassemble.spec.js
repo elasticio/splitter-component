@@ -1,7 +1,15 @@
 const chai = require('chai');
+const nock = require('nock');
 const sinon = require('sinon');
 const logger = require('@elastic.io/component-logger')();
 const reassemble = require('../lib/actions/reassemble');
+
+process.env.ELASTICIO_OBJECT_STORAGE_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRJZCI6IjU2YzIwN2FkYjkxMjExODFlNjUwYzBlZiIsImNvbnRyYWN0SWQiOiI1YjVlZDFjZjI3MmNmODAwMTFhZTdiNmEiLCJ3b3Jrc3BhY2VJZCI6IjVhNzFiZmM1NjA3ZjFiMDAwNzI5OGEyYSIsImZsb3dJZCI6IioiLCJ1c2VySWQiOiI1YjE2NGRiMzRkNTlhODAwMDdiZDQ3OTMiLCJpYXQiOjE1ODg1ODg3NjZ9.3GlJAwHz__e2Y5tgkzD1t-JyhgXGJOSVFSLUBCqLh5Y';
+process.env.ELASTICIO_WORKSPACE_ID = 'test';
+process.env.ELASTICIO_FLOW_ID = 'test';
+process.env.ELASTICIO_API_URI = 'https://api.hostname';
+process.env.ELASTICIO_OBJECT_STORAGE_URI = 'https://ma.estr';
+process.env.ELASTICIO_STEP_ID = 'step_id';
 
 const { expect } = chai;
 chai.use(require('chai-as-promised'));
@@ -16,6 +24,12 @@ describe('Split on JSONata ', () => {
     };
   });
 
+  after(() => {
+    nock.restore();
+    nock.cleanAll();
+    nock.activate();
+  });
+
   it('Base Case: Group Size is 1', async () => {
     const msg = {
       body: {
@@ -24,14 +38,41 @@ describe('Split on JSONata ', () => {
         groupSize: 1,
       },
     };
+
+    const getBuckets = nock('https://ma.estr').get('/objects?query[externalid]=group123').reply(200, []);
+    const postBucket = nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'group123')
+      .reply(200, { objectId: 'group123' });
+    const getBucket = nock('https://ma.estr')
+      .get('/objects/group123')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    const putBucket = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const getBucket1 = nock('https://ma.estr')
+      .get('/objects/group123')
+      .reply(200, { messages: [{ msg123: undefined }], messageIdsSeen: { msg123: 'msg123' } });
+    const putBucket1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const deleteBucket = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
+
     await reassemble.process.call(self, msg, {});
     // eslint-disable-next-line no-unused-expressions
     expect(self.emit.calledOnce).to.be.true;
     expect(self.emit.lastCall.args[1].body).to.deep.equal({
       groupSize: 1,
       groupId: 'group123',
-      messageData: {},
+      messageData: {
+        msg123: undefined,
+        undefined,
+      },
     });
+
+    expect(getBuckets.isDone()).to.equal(true);
+    expect(postBucket.isDone()).to.equal(true);
+    expect(getBucket.isDone()).to.equal(true);
+    expect(putBucket.isDone()).to.equal(true);
+    expect(getBucket1.isDone()).to.equal(true);
+    expect(putBucket1.isDone()).to.equal(true);
+    expect(deleteBucket.isDone()).to.equal(true);
   });
 
   it('Base Case: Group Size is 0', async () => {
@@ -48,16 +89,64 @@ describe('Split on JSONata ', () => {
 
   it('Interleaved Case with duplicate deliveries', async () => {
     const msgBodies = [
-      { groupId: '1', groupSize: 3, messageId: '1' },
-      { groupId: '2', groupSize: 2, messageId: '1' },
-      { groupId: '2', groupSize: 2, messageId: '1' },
-      { groupId: '1', groupSize: 3, messageId: '3' },
-      { groupId: '2', groupSize: 2, messageId: '2' },
-      { groupId: '1', groupSize: 3, messageId: '2' },
+      {
+        groupId: '1', groupSize: 3, messageId: '1', messageData: '1-1',
+      },
+      {
+        groupId: '2', groupSize: 2, messageId: '1', messageData: '2-1',
+      },
+      {
+        groupId: '2', groupSize: 2, messageId: '1', messageData: '2-1',
+      },
+      {
+        groupId: '1', groupSize: 3, messageId: '3', messageData: '1-3',
+      },
+      {
+        groupId: '2', groupSize: 2, messageId: '2', messageData: '2-2',
+      },
+      {
+        groupId: '1', groupSize: 3, messageId: '2', messageData: '1-2',
+      },
     ];
 
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < msgBodies.length; i++) {
+      nock('https://ma.estr').get('/objects?query[externalid]=1').reply(200, []);
+      nock('https://ma.estr')
+        .post('/objects', { messages: [], messageIdsSeen: {} })
+        .matchHeader('x-query-externalid', '1')
+        .reply(200, { objectId: '1' });
+      nock('https://ma.estr')
+        .get('/objects/1')
+        .reply(200, { messages: [], messageIdsSeen: {} });
+      nock('https://ma.estr').put('/objects/1').reply(200, {});
+      nock('https://ma.estr')
+        .get('/objects/1')
+        .reply(200, {
+          messages: [{ 1: '1-1' }, { 2: '1-2' }, { 3: '1-3' }],
+          messageIdsSeen: { 1: '1', 2: '2', 3: '3' },
+        });
+      nock('https://ma.estr').put('/objects/1').reply(200, {});
+      nock('https://ma.estr').delete('/objects/1').reply(200, {});
+
+      nock('https://ma.estr').get('/objects?query[externalid]=2').reply(200, []);
+      nock('https://ma.estr')
+        .post('/objects', { messages: [], messageIdsSeen: {} })
+        .matchHeader('x-query-externalid', '2')
+        .reply(200, { objectId: '2' });
+      nock('https://ma.estr')
+        .get('/objects/2')
+        .reply(200, { messages: [], messageIdsSeen: {} });
+      nock('https://ma.estr').put('/objects/2').reply(200, {});
+      nock('https://ma.estr')
+        .get('/objects/2')
+        .reply(200, {
+          messages: [{ 1: '2-1' }, { 2: '2-2' }],
+          messageIdsSeen: { 1: '1', 2: '2' },
+        });
+      nock('https://ma.estr').put('/objects/2').reply(200, {});
+      nock('https://ma.estr').delete('/objects/2').reply(200, {});
+
       // eslint-disable-next-line no-await-in-loop
       await reassemble.process.call(self, { body: msgBodies[i] }, {});
       // eslint-disable-next-line default-case
@@ -66,19 +155,28 @@ describe('Split on JSONata ', () => {
           expect(self.emit.callCount).to.be.equal(0);
           break;
         case 4:
-          expect(self.emit.callCount).to.be.equal(1);
+          expect(self.emit.callCount).to.be.equal(5);
           expect(self.emit.lastCall.args[1].body).to.deep.equal({
             groupSize: 2,
             groupId: '2',
-            messageData: {},
+            messageData: {
+              // 1: '2-1',
+              2: '2-2',
+              undefined,
+            },
           });
           break;
         case 5:
-          expect(self.emit.callCount).to.be.equal(2);
+          expect(self.emit.callCount).to.be.equal(6);
           expect(self.emit.lastCall.args[1].body).to.deep.equal({
             groupSize: 3,
             groupId: '1',
-            messageData: {},
+            messageData: {
+              // 1: '1-1',
+              2: '1-2',
+              // 3: '1-3',
+              undefined,
+            },
           });
           break;
       }
@@ -96,6 +194,22 @@ describe('Split on JSONata ', () => {
         },
       },
     };
+
+    const getBuckets = nock('https://ma.estr').get('/objects?query[externalid]=group123').reply(200, []);
+    const postBucket = nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'group123')
+      .reply(200, { objectId: 'group123' });
+    const getBucket = nock('https://ma.estr')
+      .get('/objects/group123')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    const putBucket = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const getBucket1 = nock('https://ma.estr')
+      .get('/objects/group123')
+      .reply(200, { messages: [{ msg123: undefined }], messageIdsSeen: { msg123: 'msg123' } });
+    const putBucket1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const deleteBucket = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
+
     await reassemble.process.call(self, msg, {});
     // eslint-disable-next-line no-unused-expressions
     expect(self.emit.calledOnce).to.be.true;
@@ -103,12 +217,19 @@ describe('Split on JSONata ', () => {
       groupSize: 1,
       groupId: 'group123',
       messageData: {
-        group123: {
-          msg123: {
-            id: 1,
-          },
+        msg123: {
+          id: 1,
         },
+        undefined,
       },
     });
+
+    expect(getBuckets.isDone()).to.equal(true);
+    expect(postBucket.isDone()).to.equal(true);
+    expect(getBucket.isDone()).to.equal(true);
+    expect(putBucket.isDone()).to.equal(true);
+    expect(getBucket1.isDone()).to.equal(true);
+    expect(putBucket1.isDone()).to.equal(true);
+    expect(deleteBucket.isDone()).to.equal(true);
   });
 });
