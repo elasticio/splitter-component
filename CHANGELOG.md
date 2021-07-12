@@ -1,5 +1,5 @@
 ## 1.2.1 (July 12, 2021)
-* Added possibility to save data from the individual messages to maester storage (using maester-client library v3.3.0) and reassemble these messages later
+* Added possibility to save data from the individual messages to maester storage (using maester-client library 3.3.0) and reassemble these messages later
 
 ## 1.2.0 (July 9, 2021)
 * Add Ability to pass data from the individual messages to re-assembled message
