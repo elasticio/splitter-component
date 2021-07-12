@@ -39,20 +39,20 @@ describe('Split on JSONata ', () => {
       },
     };
 
-    const getBuckets = nock('https://ma.estr').get('/objects?query[externalid]=group123').reply(200, []);
-    const postBucket = nock('https://ma.estr')
+    const getMessageGroups = nock('https://ma.estr').get('/objects?query[externalid]=group123').reply(200, []);
+    const postMessageGroup = nock('https://ma.estr')
       .post('/objects', { messages: [], messageIdsSeen: {} })
       .matchHeader('x-query-externalid', 'group123')
       .reply(200, { objectId: 'group123' });
-    const getBucket = nock('https://ma.estr')
+    const getMessageGroup = nock('https://ma.estr')
       .get('/objects/group123')
       .reply(200, { messages: [], messageIdsSeen: {} });
-    const putBucket = nock('https://ma.estr').put('/objects/group123').reply(200, {});
-    const getBucket1 = nock('https://ma.estr')
+    const putMessageGroup = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const getMessageGroup1 = nock('https://ma.estr')
       .get('/objects/group123')
       .reply(200, { messages: [{ msg123: undefined }], messageIdsSeen: { msg123: 'msg123' } });
-    const putBucket1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
-    const deleteBucket = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
+    const putMessageGroup1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const deleteMessageGroup = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
 
     await reassemble.process.call(self, msg, {});
     // eslint-disable-next-line no-unused-expressions
@@ -66,13 +66,13 @@ describe('Split on JSONata ', () => {
       },
     });
 
-    expect(getBuckets.isDone()).to.equal(true);
-    expect(postBucket.isDone()).to.equal(true);
-    expect(getBucket.isDone()).to.equal(true);
-    expect(putBucket.isDone()).to.equal(true);
-    expect(getBucket1.isDone()).to.equal(true);
-    expect(putBucket1.isDone()).to.equal(true);
-    expect(deleteBucket.isDone()).to.equal(true);
+    expect(getMessageGroups.isDone()).to.equal(true);
+    expect(postMessageGroup.isDone()).to.equal(true);
+    expect(getMessageGroup.isDone()).to.equal(true);
+    expect(putMessageGroup.isDone()).to.equal(true);
+    expect(getMessageGroup1.isDone()).to.equal(true);
+    expect(putMessageGroup1.isDone()).to.equal(true);
+    expect(deleteMessageGroup.isDone()).to.equal(true);
   });
 
   it('Base Case: Group Size is 0', async () => {
@@ -195,20 +195,20 @@ describe('Split on JSONata ', () => {
       },
     };
 
-    const getBuckets = nock('https://ma.estr').get('/objects?query[externalid]=group123').reply(200, []);
-    const postBucket = nock('https://ma.estr')
+    const getMessageGroups = nock('https://ma.estr').get('/objects?query[externalid]=group123').reply(200, []);
+    const postMessageGroup = nock('https://ma.estr')
       .post('/objects', { messages: [], messageIdsSeen: {} })
       .matchHeader('x-query-externalid', 'group123')
       .reply(200, { objectId: 'group123' });
-    const getBucket = nock('https://ma.estr')
+    const getMessageGroup = nock('https://ma.estr')
       .get('/objects/group123')
       .reply(200, { messages: [], messageIdsSeen: {} });
-    const putBucket = nock('https://ma.estr').put('/objects/group123').reply(200, {});
-    const getBucket1 = nock('https://ma.estr')
+    const putMessageGroup = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const getMessageGroup1 = nock('https://ma.estr')
       .get('/objects/group123')
       .reply(200, { messages: [{ msg123: undefined }], messageIdsSeen: { msg123: 'msg123' } });
-    const putBucket1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
-    const deleteBucket = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
+    const putMessageGroup1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const deleteMessageGroup = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
 
     await reassemble.process.call(self, msg, {});
     // eslint-disable-next-line no-unused-expressions
@@ -224,12 +224,12 @@ describe('Split on JSONata ', () => {
       },
     });
 
-    expect(getBuckets.isDone()).to.equal(true);
-    expect(postBucket.isDone()).to.equal(true);
-    expect(getBucket.isDone()).to.equal(true);
-    expect(putBucket.isDone()).to.equal(true);
-    expect(getBucket1.isDone()).to.equal(true);
-    expect(putBucket1.isDone()).to.equal(true);
-    expect(deleteBucket.isDone()).to.equal(true);
+    expect(getMessageGroups.isDone()).to.equal(true);
+    expect(postMessageGroup.isDone()).to.equal(true);
+    expect(getMessageGroup.isDone()).to.equal(true);
+    expect(putMessageGroup.isDone()).to.equal(true);
+    expect(getMessageGroup1.isDone()).to.equal(true);
+    expect(putMessageGroup1.isDone()).to.equal(true);
+    expect(deleteMessageGroup.isDone()).to.equal(true);
   });
 });
