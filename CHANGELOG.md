@@ -1,8 +1,8 @@
-## 1.2.1 (July 12, 2021)
-* Added possibility to save data from the individual messages to maester storage (using maester-client library 3.3.0) and reassemble these messages later
+## 1.2.1 (July 23, 2021)
+* Implemented support of maester storage in `Re-assembled message` action (maester-client library 3.3.0)
 
 ## 1.2.0 (July 9, 2021)
-* Add Ability to pass data from the individual messages to re-assembled message
+* Add Ability to pass data from the individual messages to `Re-assembled message` action
 
 ## 1.1.9 (February 12, 2021)
 * Update sailor version to 2.6.24
