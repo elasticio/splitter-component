@@ -1,3 +1,6 @@
+## 1.2.2 (August 25, 2021)
+* Added delay timer property in re-assemble action.
+
 ## 1.2.1 (July 23, 2021)
 * Implemented support of maester storage in `Re-assembled message` action (maester-client library 3.3.0)
 

@@ -50,24 +50,37 @@
           "properties": {
             "groupSize": {
               "type": "number",
-              "required": true,
-              "title": "Number of messages produced by splitter"
+              "required": false,
+              "title": "Number of messages produced by splitter",
+              "order": 3
             },
             "groupId": {
               "type": "string",
               "required": true,
-              "title": "Unique ID to describe the group"
+              "title": "Unique ID to describe the group",
+              "order": 5
             },
             "messageId": {
               "type": "string",
               "required": true,
-              "title": "Unique ID to describe this message"
+              "title": "Unique ID to describe this message",
+              "order": 4
             },
             "messageData": {
               "title": "Message Data",
               "required": false,
               "type": "object",
-              "properties": {}
+              "properties": {},
+              "order": 1
+            },
+            "timersec": {
+              "type": "number",
+              "required": false,
+              "help":{
+                "description": "Time the process waits when no incoming messages before emiting(Default 20000 miliseconds)"
+              },
+              "title": "Delay timer(in ms)",
+              "order": 2
             }
           }
         }

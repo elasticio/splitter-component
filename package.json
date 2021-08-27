@@ -2,7 +2,6 @@
   "name": "@elasticio/splitter",
   "description": "elastic.io component for splitting incoming messages",
   "scripts": {
-    "pretest": "eslint split.js lib spec --fix",
     "test": "mocha spec/split spec/splitOnJsonata spec/"
   },
   "repository": {
@@ -23,7 +22,7 @@
   },
   "devDependencies": {
     "@elastic.io/component-logger": "0.0.1",
-    "chai": "4.2.0",
+    "chai": "^4.2.0",
     "chai-as-promised": "7.1.1",
     "eslint": "7.6.0",
     "eslint-config-airbnb-base": "14.2.0",
