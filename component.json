@@ -77,7 +77,7 @@
               "type": "number",
               "required": false,
               "help":{
-                "description": "Time the process waits when no incoming messages before emiting(Default 20000 miliseconds)"
+                "description": "Time the process waits when no incoming messages before emiting(Maximum 20,000 milliseconds)"
               },
               "title": "Delay timer(in ms)",
               "order": 2

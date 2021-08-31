@@ -14,6 +14,10 @@ process.env.ELASTICIO_STEP_ID = 'step_id';
 const { expect } = chai;
 chai.use(require('chai-as-promised'));
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 describe('Split on JSONata ', () => {
   let self;
 
@@ -232,4 +236,54 @@ describe('Split on JSONata ', () => {
     expect(putMessageGroup1.isDone()).to.equal(true);
     expect(deleteMessageGroup.isDone()).to.equal(true);
   });
+
+  it('Base Case: No group Group Size, emit after 1000 miliseconds if no incoming message', async () => {
+    const msg = {
+      body: {
+        groupId: 'group123',
+        messageId: 'msg123',
+        groupSize : undefined,
+        timersec: 1000
+      },
+    };
+
+    const getMessageGroups = nock('https://ma.estr').get('/objects?query[externalid]=group123').reply(200, []);
+    const postMessageGroup = nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'group123')
+      .reply(200, { objectId: 'group123' });
+    const getMessageGroup = nock('https://ma.estr')
+      .get('/objects/group123')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    const putMessageGroup = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const getMessageGroup1 = nock('https://ma.estr')
+      .get('/objects/group123')
+      .reply(200, { messages: [{ msg123: undefined }], messageIdsSeen: { msg123: 'msg123' } })
+     
+    const putMessageGroup1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+
+    await reassemble.process.call(self, msg, {});
+
+    // timersec + 0,5 second
+    await sleep(1500);
+ 
+
+    expect(self.emit.calledOnce).to.be.true;
+    expect(self.emit.lastCall.args[1].body).to.deep.equal({
+      groupSize: 1,
+      groupId: 'group123',
+      messageData: {
+        msg123: undefined,
+        undefined,
+      },
+    });
+
+    expect(getMessageGroups.isDone()).to.equal(true);
+    expect(postMessageGroup.isDone()).to.equal(true);
+    expect(getMessageGroup.isDone()).to.equal(true);
+    expect(putMessageGroup.isDone()).to.equal(true);
+    expect(getMessageGroup1.isDone()).to.equal(true);
+    expect(putMessageGroup1.isDone()).to.equal(true);
+  });
+
 });
