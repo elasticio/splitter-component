@@ -58,7 +58,7 @@ describe('Split on JSONata ', () => {
     const putMessageGroup1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
     const deleteMessageGroup = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
 
-    await reassemble.process.call(self, msg, {});
+    await reassemble.process.call(self, msg, {mode: 'groupSize'});
     // eslint-disable-next-line no-unused-expressions
     expect(self.emit.calledOnce).to.be.true;
     expect(self.emit.lastCall.args[1].body).to.deep.equal({
@@ -88,7 +88,7 @@ describe('Split on JSONata ', () => {
       },
     };
 
-    await expect(reassemble.process.call(self, msg, {})).to.eventually.be.rejectedWith('Size must be a positive integer.');
+    await expect(reassemble.process.call(self, msg, {mode: 'groupSize'})).to.eventually.be.rejectedWith('Size must be a positive integer.');
   });
 
   it('Interleaved Case with duplicate deliveries', async () => {
@@ -152,7 +152,7 @@ describe('Split on JSONata ', () => {
       nock('https://ma.estr').delete('/objects/2').reply(200, {});
 
       // eslint-disable-next-line no-await-in-loop
-      await reassemble.process.call(self, { body: msgBodies[i] }, {});
+      await reassemble.process.call(self, { body: msgBodies[i] }, {mode: 'groupSize'});
       // eslint-disable-next-line default-case
       switch (i) {
         case i <= 3:
@@ -214,7 +214,7 @@ describe('Split on JSONata ', () => {
     const putMessageGroup1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
     const deleteMessageGroup = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
 
-    await reassemble.process.call(self, msg, {});
+    await reassemble.process.call(self, msg, {mode: 'groupSize'});
     // eslint-disable-next-line no-unused-expressions
     expect(self.emit.calledOnce).to.be.true;
     expect(self.emit.lastCall.args[1].body).to.deep.equal({
@@ -262,7 +262,7 @@ describe('Split on JSONata ', () => {
      
     const putMessageGroup1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
 
-    await reassemble.process.call(self, msg, {});
+    await reassemble.process.call(self, msg, {mode: 'timeout'});
 
     // timersec + 0,5 second
     await sleep(1500);

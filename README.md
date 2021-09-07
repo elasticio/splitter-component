@@ -92,10 +92,10 @@ and the JSONata expression `Phone.{type: number}`, an object constructor, the ac
 ### Re-assemble Messages 
 
 Inverse of the split action: Given a stream of incoming messages a sum message is generated.
-Has 3 different behaviour variants:
-* Only specify group size and no delay timer. A message is emitted once the group size is reached for the given group. Should less message then the given group size arrive, then the group is silently discarded.
-* Only specify delay timer and no group size. All incomming messages count towards the delay timer. Once no more message is received in this time frame there will be a emitted message for each group.
-* Specify both group size and delay timer. Groups that have reached their limit are emitted directly. Beyond that the action behaves as specifed in the line before.
+Has 3 different behaviour variants(options):
+* Use Group Size. A message is emitted once the group size is reached for the given group. If arriving messages for a particular group are less than the defined group size then the group is silently discarded.
+* Use Timeout. All incomming messages count towards the delay timer. Once no more message is received in this time frame there will be a emitted message for each group.
+* Use Group Size and Timeout: Specify both group size and delay timer. Groups that have reached their limit are emitted directly. Beyond that the action behaves as specifed in the line before.
 
 Supported:
 * Messages can be re-ordered in the flow
@@ -107,7 +107,7 @@ Limitations:
 * All groups must have one or more messages. (i.e. No groups of size 0).
 Can't do re-grouping when a split is done on an empty array. (i.e. No empty for each pattern supported).
 * All messages must arrive within the same container lifetime.
-If at any point there is more than a 15 second gap in messages, then the group will be silently discarded.
+If all the messages in the group do not arrive, then the group will be silently discarded.
 * The group is dropped if there are any unexpected restarts to the container.
 * In case only a groupSize is given and no delay timer is specified. The size of the group must be known by all group members.
 * In case of using the delay timer. Messages are only emitted when all parts arrive. Emitting a message only when the first part arrives isn't supported.
