@@ -93,8 +93,8 @@ and the JSONata expression `Phone.{type: number}`, an object constructor, the ac
 
 Inverse of the split action: Given a stream of incoming messages a sum message is generated.
 Has 3 different behaviour variants(options):
-* Use Group Size. A message is emitted once the group size is reached for the given group. If arriving messages for a particular group are less than the defined group size then the group is silently discarded.
-* Use Timeout. All incomming messages count towards the delay timer. Once no more message is received in this time frame there will be a emitted message for each group.
+* Use Group Size: A message is emitted once the group size is reached for the given group. If arriving messages for a particular group are less than the defined group size then the group is silently discarded.
+* Use Timeout: All incomming messages count towards the delay timer. Once no more message is received in this time frame there will be a emitted message for each group.
 * Use Group Size and Timeout: Specify both group size and delay timer. Groups that have reached their limit are emitted directly. Beyond that the action behaves as specifed in the line before.
 
 Supported:
