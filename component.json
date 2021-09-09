@@ -1,6 +1,6 @@
 {
   "title": "Splitter",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Splits a message into multiple messages.",
   "buildType":"docker",
   "actions": {
@@ -42,47 +42,14 @@
         "link": "/components/splitter/index.html#re-assemble-messages"
       },
       "main": "./lib/actions/reassemble.js",
-      "fields": {},
-      "metadata": {
-        "in": {
-          "type": "object",
+      "dynamicMetadata": true,
+      "fields": {
+        "mode": {
+          "viewClass": "SelectView",
+          "label": "Select option",
           "required": true,
-          "properties": {
-            "groupSize": {
-              "type": "number",
-              "required": false,
-              "title": "Number of messages produced by splitter",
-              "order": 3
-            },
-            "groupId": {
-              "type": "string",
-              "required": true,
-              "title": "Unique ID to describe the group",
-              "order": 5
-            },
-            "messageId": {
-              "type": "string",
-              "required": true,
-              "title": "Unique ID to describe this message",
-              "order": 4
-            },
-            "messageData": {
-              "title": "Message Data",
-              "required": false,
-              "type": "object",
-              "properties": {},
-              "order": 1
-            },
-            "timersec": {
-              "type": "number",
-              "required": false,
-              "help":{
-                "description": "Time the process waits when no incoming messages before emiting(Maximum 20,000 milliseconds)"
-              },
-              "title": "Delay timer(in ms)",
-              "order": 2
-            }
-          }
+          "model": {"groupSize": "Use Group Size", "timeout": "Use Timeout", "groupSize&timeout": "Use Group Size and Timeout"},
+          "prompt": "Select type"
         }
       }
     }

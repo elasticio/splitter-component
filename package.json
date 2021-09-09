@@ -2,6 +2,7 @@
   "name": "@elasticio/splitter",
   "description": "elastic.io component for splitting incoming messages",
   "scripts": {
+    "pretest": "eslint split.js lib spec --fix",
     "test": "mocha spec/split spec/splitOnJsonata spec/"
   },
   "repository": {
