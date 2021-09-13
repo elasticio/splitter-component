@@ -46,10 +46,10 @@
       "fields": {
         "mode": {
           "viewClass": "SelectView",
-          "label": "Select option",
+          "label": "Behavior",
           "required": true,
-          "model": {"groupSize": "Use Group Size", "timeout": "Use Timeout", "groupSize&timeout": "Use Group Size and Timeout"},
-          "prompt": "Select type"
+          "model": {"groupSize": "Produce Groups of Fixed Size (Don't Emit Partial Groups)", "timeout": "Group All Incoming Messages", "groupSize&timeout": "Produce Groups of Fixed Size (Emit Partial Groups)"},
+          "prompt": "Select behavior"
         }
       }
     }

@@ -261,6 +261,10 @@ describe('Split on JSONata ', () => {
       .reply(200, { messages: [{ msg123: undefined }], messageIdsSeen: { msg123: 'msg123' } });
 
     const putMessageGroup1 = nock('https://ma.estr').put('/objects/group123').reply(200, {});
+    const getMessageGroup2 = nock('https://ma.estr')
+      .get('/objects/group123')
+      .reply(200, { messages: [{ groupId: 'group123' }], messageIdsSeen: { msg123: 'msg123' } });
+    const deleteMessageGroup = nock('https://ma.estr').delete('/objects/group123').reply(200, {});
 
     await reassemble.process.call(self, msg, { mode: 'timeout' });
 
@@ -272,7 +276,6 @@ describe('Split on JSONata ', () => {
       groupSize: 1,
       groupId: 'group123',
       messageData: {
-        msg123: undefined,
         undefined,
       },
     });
@@ -283,5 +286,7 @@ describe('Split on JSONata ', () => {
     expect(putMessageGroup.isDone()).to.equal(true);
     expect(getMessageGroup1.isDone()).to.equal(true);
     expect(putMessageGroup1.isDone()).to.equal(true);
+    expect(getMessageGroup2.isDone()).to.equal(true);
+    expect(deleteMessageGroup.isDone()).to.equal(true);
   });
 });

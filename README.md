@@ -93,9 +93,9 @@ and the JSONata expression `Phone.{type: number}`, an object constructor, the ac
 
 Inverse of the split action: Given a stream of incoming messages a sum message is generated.
 Has 3 different behaviour variants(options):
-* Use Group Size: A message is emitted once the group size is reached for the given group. If arriving messages for a particular group are less than the defined group size then the group is silently discarded.
-* Use Timeout: All incomming messages count towards the delay timer. Once no more message is received in this time frame there will be a emitted message for each group.
-* Use Group Size and Timeout: Specify both group size and delay timer. Groups that have reached their limit are emitted directly. Beyond that the action behaves as specifed in the line before.
+* Produce Groups of Fixed Size (Don't Emit Partial Groups): A message is emitted once the group size is reached for the given group. If arriving messages for a particular group are less than the defined group size then the group will not be emitted.
+* Group All Incoming Messages: All incomming messages will be gathered until there are no more incoming messages at which point messages will be emitted for each group.
+* Produce Groups of Fixed Size (Emit Partial Groups): Specify both group size and delay timer. Once a group is complete, that group will be emitted. Once there are no more incoming messages, then partially completed groups will also be emitted.
 
 Supported:
 * Messages can be re-ordered in the flow
@@ -106,8 +106,7 @@ Supported:
 Limitations:
 * All groups must have one or more messages. (i.e. No groups of size 0).
 Can't do re-grouping when a split is done on an empty array. (i.e. No empty for each pattern supported).
-* All messages must arrive within the same container lifetime.
-If all the messages in the group do not arrive, then the group will be silently discarded.
+If all the messages in the group do not arrive, then the group will not be emitted..
 * The group is dropped if there are any unexpected restarts to the container.
 * In case only a groupSize is given and no delay timer is specified. The size of the group must be known by all group members.
 * In case of using the delay timer. Messages are only emitted when all parts arrive. Emitting a message only when the first part arrives isn't supported.
