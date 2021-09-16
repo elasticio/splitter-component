@@ -106,7 +106,7 @@ Supported:
 Limitations:
 * All groups must have one or more messages. (i.e. No groups of size 0).
 Can't do re-grouping when a split is done on an empty array. (i.e. No empty for each pattern supported).
-If all the messages in the group do not arrive, then the group will not be emitted..
+If all the messages in the group do not arrive, then the group will not be emitted.
 * The group is dropped if there are any unexpected restarts to the container.
 * In case only a groupSize is given and no delay timer is specified. The size of the group must be known by all group members.
 * In case of using the delay timer. Messages are only emitted when all parts arrive. Emitting a message only when the first part arrives isn't supported.
