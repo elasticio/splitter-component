@@ -1,4 +1,7 @@
-## 1.3.0 (July 23, 2021)
+## 1.3.0 (October 1, 2021)
+* Update `Re-assembled message` action: Implemented option to select processing behavior of incoming messages.
+
+## 1.2.1 (July 23, 2021)
 * Implemented support of maester storage in `Re-assembled message` action (maester-client library 3.3.0)
 
 ## 1.2.0 (July 9, 2021)
