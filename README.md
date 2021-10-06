@@ -96,7 +96,7 @@ Inverse of the split action: Given a stream of incoming messages a sum message i
 #### List of Expected Config fields
 ```Behavior``` - Has 3 different behaviour variants(options):
 * Produce Groups of Fixed Size (Don't Emit Partial Groups): A message is emitted once the group size is reached for the given group. If arriving messages for a particular group are less than the defined group size then the group will not be emitted.
-* Group All Incoming Messages: All incomming messages will be gathered until there are no more incoming messages at which point messages will be emitted for each group.
+* Group All Incoming Messages: All incomming messages will be gathered until there are no more incoming messages in the specifeid timeframe (delay timer) at which point messages will be emitted for each group.
 * Produce Groups of Fixed Size (Emit Partial Groups): Specify both group size and delay timer. Once a group is complete, that group will be emitted. Once there are no more incoming messages, then partially completed groups will also be emitted.
 
 Supported:
@@ -118,7 +118,9 @@ If all the messages in the group do not arrive, then the group will not be emitt
 ```groupId``` - Globally unique id for the group to distinguish it from other groups. This value needs to be the same for all messages in a group.
 
 ```messageId``` - Id for a message to distinguish it from other messages in the group.
-Must be unique per group but does not have to be globally unique. This value needs to be different for all messages in a group.
+Must be unique per group but does not have to be globally unique. This value needs to be different for all messages in a group. 
+In case a messageId occures multiple times, only the messageData of the latest message survives.
+If the messageId is not defined, all messages are included in the group.
 
 ```messageData``` - Data from individual messages can be inserted here in form of an object. This object is then inserted into an array which is available in the message emitted for this group.
 
