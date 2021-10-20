@@ -120,7 +120,7 @@ If all the messages in the group do not arrive, then the group will not be emitt
 ```messageId``` - Id for a message to distinguish it from other messages in the group.
 Must be unique per group but does not have to be globally unique. This value needs to be different for all messages in a group. 
 In case a messageId occures multiple times, only the messageData of the latest message survives.
-If the messageId is not defined, all messages are included in the group.
+If the messageId is not defined, a random guid will be generated and used as messageID.
 
 ```messageData``` - Data from individual messages can be inserted here in form of an object. This object is then inserted into an array which is available in the message emitted for this group.
 

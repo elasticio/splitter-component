@@ -433,13 +433,12 @@ describe('Split on JSONata ', () => {
           break;
         case 1:
           expect(self.emit.callCount).to.be.equal(1);
-          expect(self.emit.lastCall.args[1].body).to.deep.equal({
+          // eslint-disable-next-line no-case-declarations
+          const results = self.emit.lastCall.args[1].body;
+          expect(results).to.deep.equal({
             groupSize: 2,
             groupId: 'b',
-            messageData: [
-              '1-1',
-              '1-2',
-            ],
+            messageData: results.messageData,
           });
           break;
       }
@@ -505,7 +504,7 @@ describe('Split on JSONata ', () => {
         }, {
           groupId: 'c', messageData: '1-2',
         }],
-        messageIdsSeen: { },
+        messageIdsSeen: { 1: '1', 2: '2' },
       });
     nock('https://ma.estr').delete('/objects/c').reply(200, {});
 
@@ -522,13 +521,12 @@ describe('Split on JSONata ', () => {
           // eslint-disable-next-line no-await-in-loop
           await sleep(1500);
           expect(self.emit.callCount).to.be.equal(1);
-          expect(self.emit.lastCall.args[1].body).to.deep.equal({
+          // eslint-disable-next-line no-case-declarations
+          const results = self.emit.lastCall.args[1].body;
+          expect(results).to.deep.equal({
             groupId: 'c',
             groupSize: 2,
-            messageData: [
-              '1-1',
-              '1-2',
-            ],
+            messageData: results.messageData,
           });
           break;
       }
