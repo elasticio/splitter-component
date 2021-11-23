@@ -45,7 +45,7 @@ The splitting expression is "users", action will return output:
 
 ### Split on JSONata Expression
 
-This component takes the incoming message body and applies the configured JSONata tranformation on it. The evaluated transformation must be an array. This array is split and emitted into multiple messages.
+This component takes the incoming message body and applies the configured JSONata transformation on it. The evaluated transformation must be an array. This array is split and emitted into multiple messages.
 
 For example, given the following message:
 
@@ -98,7 +98,7 @@ Inverse of the split action: Given a stream of incoming messages a sum message i
 #### List of Expected Config fields
 ```Behavior``` - Has 3 different behaviour variants(options):
 * Produce Groups of Fixed Size (Don't Emit Partial Groups): A message is emitted once the group size is reached for the given group. If arriving messages for a particular group are less than the defined group size then the group will not be emitted.
-* Group All Incoming Messages: All incomming messages will be gathered until there are no more incoming messages in the specifeid timeframe (delay timer) at which point messages will be emitted for each group.
+* Group All Incoming Messages: All incoming messages will be gathered until there are no more incoming messages in the specifeid timeframe (delay timer) at which point messages will be emitted for each group.
 * Produce Groups of Fixed Size (Emit Partial Groups): Specify both group size and delay timer. Once a group is complete, that group will be emitted. Once there are no more incoming messages, then partially completed groups will also be emitted.
 
 Supported:
