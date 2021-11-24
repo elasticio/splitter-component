@@ -1,3 +1,6 @@
+## 1.3.1 (November 26, 2021)
+* Update sailor version to 2.6.26
+
 ## 1.3.0 (October 1, 2021)
 * Update `Re-assembled message` action: Implemented option to select processing behavior of incoming messages.
 
