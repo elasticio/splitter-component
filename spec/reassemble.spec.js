@@ -289,4 +289,247 @@ describe('Split on JSONata ', () => {
     expect(getMessageGroup2.isDone()).to.equal(true);
     expect(deleteMessageGroup.isDone()).to.equal(true);
   });
+
+  it('Base Case: Group Size is 2, with different messageId and messageData', async () => {
+    const msg = [
+      {
+        groupId: 'a', groupSize: 2, messageId: '1', messageData: '1-1',
+      },
+      {
+        groupId: 'a', groupSize: 2, messageId: '2', messageData: '1-2',
+      },
+    ];
+
+    // First Run
+    nock('https://ma.estr').get('/objects?query[externalid]=a').reply(200, []);
+    nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'a')
+      .reply(200, { objectId: 'a' });
+    nock('https://ma.estr')
+      .get('/objects/a')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    nock('https://ma.estr').put('/objects/a').reply(200, {});
+    nock('https://ma.estr')
+      .get('/objects/a')
+      .reply(200, {
+        messages: [{
+          groupSize: 2, messageId: '1', groupId: 'a', messageData: '1-1',
+        }],
+        messageIdsSeen: { 1: '1' },
+      });
+    nock('https://ma.estr').put('/objects/a').reply(200, {});
+    nock('https://ma.estr').delete('/objects/a').reply(200, {});
+
+    // Second  Run
+    nock('https://ma.estr').get('/objects?query[externalid]=a').reply(200, []);
+    nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'a')
+      .reply(200, { objectId: 'a' });
+    nock('https://ma.estr')
+      .get('/objects/a')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    nock('https://ma.estr').put('/objects/a').reply(200, {});
+    nock('https://ma.estr')
+      .get('/objects/a')
+      .reply(200, {
+        messages: [{
+          groupSize: 2, groupId: '1', messageId: '1', messageData: '1-1',
+        }, {
+          groupSize: 2, groupId: '2', messageId: '2', messageData: '1-2',
+        }],
+        messageIdsSeen: { 1: '1', 2: '2' },
+      });
+    nock('https://ma.estr').put('/objects/a').reply(200, {});
+    nock('https://ma.estr').delete('/objects/a').reply(200, {});
+
+    for (let i = 0; i < msg.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await reassemble.process.call(self, { body: msg[i] }, { mode: 'groupSize' });
+
+      // eslint-disable-next-line default-case
+      switch (i) {
+        case 0:
+          expect(self.emit.callCount).to.be.equal(0);
+          break;
+        case 1:
+          expect(self.emit.callCount).to.be.equal(1);
+          expect(self.emit.lastCall.args[1].body).to.deep.equal({
+            groupSize: 2,
+            groupId: 'a',
+            messageData: {
+              1: '1-1',
+              2: '1-2',
+            },
+          });
+          break;
+      }
+    }
+  });
+
+  it('Base Case: Group Size is 2, with messageId UNDEFINED and messageData defined', async () => {
+    const msg = [
+      {
+        groupId: 'b', groupSize: 2, messageData: '1-1',
+      },
+      {
+        groupId: 'b', groupSize: 2, messageData: '1-2',
+      },
+    ];
+
+    // First Run
+    nock('https://ma.estr').get('/objects?query[externalid]=b').reply(200, []);
+    nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'b')
+      .reply(200, { objectId: 'b' });
+    nock('https://ma.estr')
+      .get('/objects/b')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    nock('https://ma.estr').put('/objects/b').reply(200, {});
+    nock('https://ma.estr')
+      .get('/objects/b')
+      .reply(200, {
+        messages: [{
+          groupSize: 2, groupId: 'b', messageData: '1-1',
+        }],
+        messageIdsSeen: { 1: '1' },
+      });
+    nock('https://ma.estr').put('/objects/b').reply(200, {});
+    nock('https://ma.estr').delete('/objects/b').reply(200, {});
+
+    // Second  Run
+    nock('https://ma.estr').get('/objects?query[externalid]=b').reply(200, []);
+    nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'b')
+      .reply(200, { objectId: 'b' });
+    nock('https://ma.estr')
+      .get('/objects/b')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    nock('https://ma.estr').put('/objects/b').reply(200, {});
+    nock('https://ma.estr')
+      .get('/objects/b')
+      .reply(200, {
+        messages: [{
+          groupSize: 2, groupId: 'b', messageData: '1-1',
+        }, {
+          groupSize: 2, groupId: 'b', messageData: '1-2',
+        }],
+        messageIdsSeen: { 1: '1', 2: '2' },
+      });
+    nock('https://ma.estr').put('/objects/b').reply(200, {});
+    nock('https://ma.estr').delete('/objects/b').reply(200, {});
+
+    for (let i = 0; i < msg.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await reassemble.process.call(self, { body: msg[i] }, { mode: 'groupSize' });
+
+      // eslint-disable-next-line default-case
+      switch (i) {
+        case 0:
+          expect(self.emit.callCount).to.be.equal(0);
+          break;
+        case 1:
+          expect(self.emit.callCount).to.be.equal(1);
+          // eslint-disable-next-line no-case-declarations
+          const results = self.emit.lastCall.args[1].body;
+          expect(results).to.deep.equal({
+            groupSize: 2,
+            groupId: 'b',
+            messageData: results.messageData,
+          });
+          break;
+      }
+    }
+  });
+
+  it('Base Case: Using time delay, with messageId UNDEFINED and messageData defined', async () => {
+    const msg = [
+      {
+        groupId: 'c', timersec: 1000, messageData: '1-1',
+      },
+      {
+        groupId: 'c', timersec: 1000, messageData: '1-2',
+      },
+    ];
+
+    // First Run
+    nock('https://ma.estr').get('/objects?query[externalid]=c').reply(200, []);
+    nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'c')
+      .reply(200, { objectId: 'c' });
+    nock('https://ma.estr')
+      .get('/objects/c')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    nock('https://ma.estr').put('/objects/c').reply(200, {});
+    nock('https://ma.estr')
+      .get('/objects/c')
+      .reply(200, {
+        messages: [{
+          groupId: 'c', messageData: '1-1',
+        }],
+        messageIdsSeen: { },
+      });
+    nock('https://ma.estr').put('/objects/c').reply(200, {});
+
+    // Second  Run
+    nock('https://ma.estr').get('/objects?query[externalid]=c').reply(200, []);
+    nock('https://ma.estr')
+      .post('/objects', { messages: [], messageIdsSeen: {} })
+      .matchHeader('x-query-externalid', 'c')
+      .reply(200, { objectId: 'c' });
+    nock('https://ma.estr')
+      .get('/objects/c')
+      .reply(200, { messages: [], messageIdsSeen: {} });
+    nock('https://ma.estr').put('/objects/c').reply(200, {});
+    nock('https://ma.estr')
+      .get('/objects/c')
+      .reply(200, {
+        messages: [{
+          groupId: 'c', messageData: '1-1',
+        }, {
+          groupId: 'c', messageData: '1-2',
+        }],
+        messageIdsSeen: { },
+      });
+    nock('https://ma.estr').put('/objects/c').reply(200, {});
+    nock('https://ma.estr')
+      .get('/objects/c')
+      .reply(200, {
+        messages: [{
+          groupId: 'c', messageData: '1-1',
+        }, {
+          groupId: 'c', messageData: '1-2',
+        }],
+        messageIdsSeen: { 1: '1', 2: '2' },
+      });
+    nock('https://ma.estr').delete('/objects/c').reply(200, {});
+
+    for (let i = 0; i < msg.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await reassemble.process.call(self, { body: msg[i] }, { mode: 'timeout' });
+
+      // eslint-disable-next-line default-case
+      switch (i) {
+        case 0:
+          expect(self.emit.callCount).to.be.equal(0);
+          break;
+        case 1:
+          // eslint-disable-next-line no-await-in-loop
+          await sleep(1500);
+          expect(self.emit.callCount).to.be.equal(1);
+          // eslint-disable-next-line no-case-declarations
+          const results = self.emit.lastCall.args[1].body;
+          expect(results).to.deep.equal({
+            groupId: 'c',
+            groupSize: 2,
+            messageData: results.messageData,
+          });
+          break;
+      }
+    }
+  });
 });
