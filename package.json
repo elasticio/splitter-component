@@ -12,13 +12,13 @@
   "author": "elastic.io GmbH",
   "license": "BSD-2-Clause",
   "engines": {
-    "node": "12.18.2"
+    "node": "16.x"
   },
   "dependencies": {
     "@elastic.io/component-commons-library": "2.0.2",
-    "@elastic.io/maester-client": "3.4.3-dev.2",
+    "@elastic.io/maester-client": "4.0.3",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.6.27",
+    "elasticio-sailor-nodejs": "2.6.29",
     "lodash": "4.17.21",
     "uuid": "8.3.2"
   },
@@ -29,7 +29,7 @@
     "eslint": "7.6.0",
     "eslint-config-airbnb-base": "14.2.0",
     "eslint-plugin-import": "2.22.0",
-    "mocha": "8.1.1",
+    "mocha": "10.0.0",
     "nock": "12.0.3",
     "sinon": "9.0.3"
   }

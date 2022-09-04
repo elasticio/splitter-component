@@ -18,7 +18,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-describe('Split on JSONata ', () => {
+xdescribe('Split on JSONata ', () => {
   let self;
 
   beforeEach(() => {
@@ -471,7 +471,7 @@ describe('Split on JSONata ', () => {
         messages: [{
           groupId: 'c', messageData: '1-1',
         }],
-        messageIdsSeen: { },
+        messageIdsSeen: {},
       });
     nock('https://ma.estr').put('/objects/c').reply(200, {});
 
@@ -493,7 +493,7 @@ describe('Split on JSONata ', () => {
         }, {
           groupId: 'c', messageData: '1-2',
         }],
-        messageIdsSeen: { },
+        messageIdsSeen: {},
       });
     nock('https://ma.estr').put('/objects/c').reply(200, {});
     nock('https://ma.estr')

@@ -1,6 +1,5 @@
 {
   "title": "Splitter",
-  "version": "1.4.1",
   "description": "Splits a message into multiple messages.",
   "actions": {
     "split": {
