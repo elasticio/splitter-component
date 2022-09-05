@@ -1,3 +1,9 @@
+## 1.4.2 (September 09, 2022)
+* Update Sailor version to 2.6.29
+* Update @elastic.io/maester-client version to 4.0.3
+* Get rid of vulnerabilities in dependencies
+* Fix message processing
+
 ## 1.4.1 (April 08, 2022)
 * Update Sailor version to 2.6.27
 * Get rid of vulnerabilities in dependencies
