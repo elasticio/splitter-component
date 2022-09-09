@@ -18,7 +18,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-xdescribe('Split on JSONata ', () => {
+describe('Split on JSONata ', () => {
   let self;
 
   beforeEach(() => {
