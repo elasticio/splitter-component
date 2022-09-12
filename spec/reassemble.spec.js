@@ -20,7 +20,6 @@ function sleep(ms) {
 
 describe('Split on JSONata ', () => {
   let self;
-
   beforeEach(() => {
     self = {
       emit: sinon.spy(),
