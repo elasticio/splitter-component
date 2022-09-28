@@ -114,7 +114,7 @@ If all the messages in the group do not arrive, then the group will not be emitt
 * The group is dropped if there are any unexpected restarts to the container.
 * In case only a groupSize is given and no delay timer is specified. The size of the group must be known by all group members.
 * In case of using the delay timer. Messages are only emitted when all parts arrive. Emitting a message only when the first part arrives isn't supported.
-* The delay timer can not exceed 40,000 milliseconds. If more than this maximum is given, then this maximum will be used instead.
+* The delay timer can not exceed 20,000 milliseconds. If more than this maximum is given, then this maximum will be used instead.
 
 #### List of Expected Config fields
 ```groupId``` - Globally unique id for the group to distinguish it from other groups. This value needs to be the same for all messages in a group.
