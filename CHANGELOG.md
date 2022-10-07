@@ -1,8 +1,9 @@
-## 1.4.2 (September 23, 2022)
-* Update Sailor version to 2.6.29
+## 1.4.2 (October 07, 2022)
+* Update Sailor version to 2.7.0
 * Update @elastic.io/maester-client version to 4.0.3
 * Get rid of vulnerabilities in dependencies
 * Fix message processing
+* Maximum `Delay timer` in `Re-assembled message` action reduced to 20 sec
 
 ## 1.4.1 (April 08, 2022)
 * Update Sailor version to 2.6.27
