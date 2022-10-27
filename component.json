@@ -1,7 +1,7 @@
 {
   "title": "Splitter",
   "description": "Splits a message into multiple messages.",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "actions": {
     "split": {
       "deprecated": true,

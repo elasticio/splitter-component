@@ -18,7 +18,7 @@
     "@elastic.io/component-commons-library": "2.0.2",
     "@elastic.io/maester-client": "4.0.3",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.7.0",
+    "elasticio-sailor-nodejs": "2.7.1",
     "lodash": "4.17.21",
     "uuid": "8.3.2"
   },
