@@ -2,6 +2,7 @@
   "name": "@elasticio/splitter",
   "description": "elastic.io component for splitting incoming messages",
   "scripts": {
+    "audit": "better-npm-audit audit --level high --production",
     "pretest": "eslint split.js lib spec --fix",
     "test": "mocha spec/split spec/splitOnJsonata spec/"
   },
@@ -12,7 +13,7 @@
   "author": "elastic.io GmbH",
   "license": "BSD-2-Clause",
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "dependencies": {
     "@elastic.io/component-commons-library": "2.0.2",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@elastic.io/component-logger": "0.0.1",
+    "better-npm-audit": "3.7.3",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "dotenv": "16.0.3",
