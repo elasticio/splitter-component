@@ -1,3 +1,6 @@
+## 1.4.4 (March 28, 2023)
+* Fix [issue](https://github.com/elasticio/splitter-component/issues/97) with timer
+
 ## 1.4.3 (November 04, 2022)
 * Update Sailor version to 2.7.1
 
