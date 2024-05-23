@@ -79,9 +79,9 @@ Combines separate messages into one.
 #### Configuration Fields
 
 * **Behavior** - (dropdown, required): Select one of the following options:
-  * `Produce Groups of Fixed Size (Don't Emit Partial Groups)` - A message is emitted once the group size is reached. If the incoming messages for a particular group are fewer than the defined group size, the group will not be emitted.
+  * `Produce Groups of Fixed Size (Don't Emit Partial Groups)` - Messages keeps collecting continuously. Once the group size is reached, the group is emitted and the new group starts collecting immediately. If the number of incoming messages for a particular group is less than the defined group size, the group will be stored in the internal storage (Maester) and proceed collecting messages into the open group.
   * `Group All Incoming Messages` - All incoming messages will be gathered until there are no more incoming messages within the specified timeframe (delay timer), at which point messages will be emitted for each group.
-  * `Produce Groups of Fixed Size (Emit Partial Groups)` - Specify both group size and delay timer. Once a group is complete, that group will be emitted. If there are no more incoming messages, partially completed groups will also be emitted.
+  * `Produce Groups of Fixed Size (Emit Partial Groups)` - Specify both group size and delay timer. Once a group is complete, that group will be emitted. If there are no more incoming messages within the specified timeframe, partially completed groups will also be emitted.
 * **Emit result as array** - (checkbox, optional): If selected, `messageData` in the response object will be an array of messages without message IDs.
 
   <details><summary>Example with unchecked</summary>
@@ -141,3 +141,4 @@ Combines separate messages into one.
 
 * The total size of stored messages in groups should be less than 5MB; otherwise, the component will emit the group regardless of the selected behavior.
 * Messages are stored in component memory during execution - "Suspending" the flow will erase them.
+* With option `Produce Groups of Fixed Size (Don't Emit Partial Groups)` if group is not ready, messages will be stored inside internal storage (Maester) for up to two days
