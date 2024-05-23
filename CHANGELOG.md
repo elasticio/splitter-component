@@ -1,3 +1,9 @@
+## 1.5.0 (March 28, 2023)
+* Revitalized `Re-assembled message` action - now all messages are stored inside the component and saved to storage only when needed
+* Added new checkbox `Emit result as array` to `Re-assembled message` action
+* Update Sailor version to 2.7.2
+* Get rid of vulnerabilities in dependencies
+
 ## 1.4.4 (March 28, 2023)
 * Fix [issue](https://github.com/elasticio/splitter-component/issues/97) with timer
 

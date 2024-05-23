@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const logger = require('@elastic.io/component-logger')();
-const splitter = require('../../split.js');
+const splitter = require('../../split');
 const data = require('./data');
 
 describe('Splitter ', () => {

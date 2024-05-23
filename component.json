@@ -1,7 +1,7 @@
 {
   "title": "Splitter",
   "description": "Splits a message into multiple messages.",
-  "version": "1.4.4",
+  "version": "1.5.0-dev.1",
   "actions": {
     "split": {
       "deprecated": true,
@@ -53,6 +53,14 @@
             "groupSize&timeout": "Produce Groups of Fixed Size (Emit Partial Groups)"
           },
           "prompt": "Select behavior"
+        },
+        "emitAsArray": {
+          "viewClass": "CheckBoxView",
+          "label": "Emit result as array",
+          "prompt": "Select behavior",
+          "help": {
+            "description": "If selected, \"messageData\" will be array of messages without messages IDs<br><br>Example with unchecked:<br><div style=\"background-color:#E7E8EB;\">{<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"groupSize\":</span> <span style=\"color:#75438a;\">2</span>,<br><span style=\"color:#1d75b3;\">\"groupId\":</span> <span style=\"color:#b35e14;\">\"test22\"</span>,<br><span style=\"color:#1d75b3;\">\"messageData\":</span> {<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"d899b000-5455-4c7a-9781-f16203426b93\":</span> {<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"dataFromMessage\":</span> <span style=\"color:#b35e14;\">\"Message1\"</span></div>},<br><span style=\"color:#1d75b3;\">\"bdfca2b1-7aa7-444c-916d-3a2c17fc5dd6\":</span> {<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"dataFromMessage\":</span> <span style=\"color:#b35e14;\">\"Message2\"</span></div>}</div>}</div>}</div><br><br>Example with checked:<br><div style=\"background-color:#E7E8EB;\">{<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"groupSize\":</span> <span style=\"color:#75438a;\">2</span>,<br><span style=\"color:#1d75b3;\">\"groupId\":</span> <span style=\"color:#b35e14;\">\"test22\"</span>,<br><span style=\"color:#1d75b3;\">\"messageData\":</span> [<div style=\"margin-left:1em;\">{<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"dataFromMessage\":</span> <span style=\"color:#b35e14;\">\"Message1\"</span></div>},<br>{<div style=\"margin-left:1em;\"><span style=\"color:#1d75b3;\">\"dataFromMessage\":</span> <span style=\"color:#b35e14;\">\"Message2\"</span></div>}</div>]</div>}</div>"
+          }
         }
       }
     }
