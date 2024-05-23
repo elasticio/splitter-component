@@ -1,5 +1,5 @@
 ## 1.5.0 (March 28, 2023)
-* Revitalized `Re-assembled message` action - now all messages are stored inside the component and saved to storage only when needed
+* Revitalized `Re-assembled message` action - now all messages are stored in memory within the component and saved to the external storage (Maester) only when needed
 * Added new checkbox `Emit result as array` to `Re-assembled message` action
 * Update Sailor version to 2.7.2
 * Get rid of vulnerabilities in dependencies
