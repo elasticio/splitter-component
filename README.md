@@ -125,11 +125,11 @@ Combines separate messages into one.
 * **Unique ID to describe this message** - (string, optional): An ID for a message to distinguish it from other messages in the group. Must be unique per group but does not have to be globally unique. This value needs to be different for all messages in a group. If a messageId occurs multiple times, only the messageData of the latest message will be retained. If the messageId is not defined, a random GUID will be generated and used as the messageID.
 * **Message Data** - (object, optional): Data from individual messages.
   
-  If `Produce Groups of Fixed Size (Don't Emit Partial Groups)` or `Produce Groups of Fixed Size (Emit Partial Groups)` is selected:
-  * **Number of messages expected to be reassembled into the group** - (number, optional): The number of messages when the group is considered full.
-  
-  If `Group All Incoming Messages` or `Produce Groups of Fixed Size (Emit Partial Groups)` is selected:
-  * **Delay timer (in ms)** - (number, optional): The time the process waits when no incoming messages before emitting. Maximum is 20000 ms (20 sec). If you try to put here more than allowed, than default value will be used
+If `Group on fixed amount of messages` or `Group on amount of messages or timeout` is selected:
+* **Number of messages expected to be reassembled into the group** - (number, optional): The number of messages when the group is considered full.
+
+If `Group on timeout` or `Group on amount of messages or timeout` is selected:
+* **Delay timer (in ms)** - (number, optional): The time the process waits when no incoming messages before emitting. Maximum is 20000 ms (20 sec). If you try to put here more than allowed, than default value will be used
 
 #### Output Metadata
 
