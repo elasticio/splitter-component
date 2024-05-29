@@ -48,9 +48,12 @@
           "label": "Behavior",
           "required": true,
           "model": {
-            "groupSize": "Produce Groups of Fixed Size (Don't Emit Partial Groups)",
-            "timeout": "Group All Incoming Messages",
-            "groupSize&timeout": "Produce Groups of Fixed Size (Emit Partial Groups)"
+            "groupSize": "Group on fixed amount of messages",
+            "timeout": "Group on timeout",
+            "groupSize&timeout": "Group on amount of messages or timeout"
+          },
+          "help": {
+            "description": "Options description:<br><br><b>Group on fixed amount of messages</b> - Messages keeps collecting continuously. Once the group size is reached, the group is emitted and the new group starts collecting immediately. If the number of incoming messages for a particular group is less than the defined group size, the group will be stored in the internal storage (Maester) and proceed collecting messages into the open group.<br><b>Group on timeout</b> - All incoming messages will be gathered until there are no more incoming messages within the specified timeframe (delay timer), at which point messages will be emitted for each group.<br><b>Group on amount of messages or timeout</b> - Specify both group size and delay timer. Once a group is complete, that group will be emitted. If there are no more incoming messages within the specified timeframe, partially completed groups will also be emitted."
           },
           "prompt": "Select behavior"
         },

@@ -79,9 +79,9 @@ Combines separate messages into one.
 #### Configuration Fields
 
 * **Behavior** - (dropdown, required): Select one of the following options:
-  * `Produce Groups of Fixed Size (Don't Emit Partial Groups)` - Messages keeps collecting continuously. Once the group size is reached, the group is emitted and the new group starts collecting immediately. If the number of incoming messages for a particular group is less than the defined group size, the group will be stored in the internal storage (Maester) and proceed collecting messages into the open group.
-  * `Group All Incoming Messages` - All incoming messages will be gathered until there are no more incoming messages within the specified timeframe (delay timer), at which point messages will be emitted for each group.
-  * `Produce Groups of Fixed Size (Emit Partial Groups)` - Specify both group size and delay timer. Once a group is complete, that group will be emitted. If there are no more incoming messages within the specified timeframe, partially completed groups will also be emitted.
+  * `Group on fixed amount of messages` - Messages keeps collecting continuously. Once the group size is reached, the group is emitted and the new group starts collecting immediately. If the number of incoming messages for a particular group is less than the defined group size, the group will be stored in the internal storage (Maester) and proceed collecting messages into the open group.
+  * `Group on timeout` - All incoming messages will be gathered until there are no more incoming messages within the specified timeframe (delay timer), at which point messages will be emitted for each group.
+  * `Group on amount of messages or timeout` - Specify both group size and delay timer. Once a group is complete, that group will be emitted. If there are no more incoming messages within the specified timeframe, partially completed groups will also be emitted.
 * **Emit result as array** - (checkbox, optional): If selected, `messageData` in the response object will be an array of messages without message IDs.
 
   <details><summary>Example with unchecked</summary>
@@ -129,7 +129,7 @@ Combines separate messages into one.
   * **Number of messages expected to be reassembled into the group** - (number, optional): The number of messages when the group is considered full.
   
   If `Group All Incoming Messages` or `Produce Groups of Fixed Size (Emit Partial Groups)` is selected:
-  * **Time the process waits when no incoming messages before emitting (Default 20000 milliseconds)** - (number, optional): The time the process waits when no incoming messages before emitting. Maximum 20,000 ms.
+  * **Delay timer (in ms)** - (number, optional): The time the process waits when no incoming messages before emitting. Maximum is 20000 ms (20 sec). If you try to put here more than allowed, than default value will be used
 
 #### Output Metadata
 
