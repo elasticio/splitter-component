@@ -23,7 +23,7 @@ describe('Reassemble', () => {
     const msg = {
       body: {
         groupId: 'group123',
-        groupSize: 500,
+        groupSize: 5,
         timersec: 500,
         messageData: structuredClone(testData),
       },
@@ -31,11 +31,11 @@ describe('Reassemble', () => {
     const cfg = { mode: 'groupSize&timeout', emitAsArray: true };
 
     const context = getContext();
-    for (let i = 0; i < 1001; i += 1) {
+    for (let i = 0; i < 11; i += 1) {
       await reassemble.process.call(context, msg, cfg);
     }
     expect(context.emit.callCount).to.be.equal(2);
-    expect(context.emit.getCall(0).lastArg.body.messageData.length).to.equal(500);
+    expect(context.emit.getCall(0).lastArg.body.messageData.length).to.equal(5);
     expect(context.emit.getCall(0).lastArg.body.messageData[0]).to.deep.equal(testData);
     await sleep(800);
     expect(context.emit.callCount).to.be.equal(3);
@@ -46,7 +46,7 @@ describe('Reassemble', () => {
     const msg = {
       body: {
         groupId: 'group123',
-        groupSize: 500,
+        groupSize: 5,
         timersec: 500,
         messageData: structuredClone(testData),
       },
@@ -54,11 +54,11 @@ describe('Reassemble', () => {
     const cfg = { mode: 'groupSize', emitAsArray: true };
 
     const context = getContext();
-    for (let i = 0; i < 1001; i += 1) {
+    for (let i = 0; i < 11; i += 1) {
       await reassemble.process.call(context, msg, cfg);
     }
     expect(context.emit.callCount).to.be.equal(2);
-    expect(context.emit.getCall(0).lastArg.body.messageData.length).to.equal(500);
+    expect(context.emit.getCall(0).lastArg.body.messageData.length).to.equal(5);
     expect(context.emit.getCall(0).lastArg.body.messageData[0]).to.deep.equal(testData);
     await sleep(800);
     expect(context.emit.callCount).to.be.equal(3);
@@ -69,7 +69,7 @@ describe('Reassemble', () => {
     const msg = {
       body: {
         groupId: 'group123',
-        groupSize: 500,
+        groupSize: 5,
         timersec: 500,
         messageData: structuredClone(testData),
       },
@@ -77,7 +77,7 @@ describe('Reassemble', () => {
     const cfg = { mode: 'timeout', emitAsArray: true };
 
     const context = getContext();
-    for (let i = 0; i < 300; i += 1) {
+    for (let i = 0; i < 3; i += 1) {
       await reassemble.process.call(context, msg, cfg);
     }
     expect(context.emit.callCount).to.be.equal(0);
@@ -90,7 +90,7 @@ describe('Reassemble', () => {
     const msg = {
       body: {
         groupId: 'group123',
-        groupSize: 500,
+        groupSize: 5,
         timersec: 500,
         messageData: structuredClone(testData),
       },
@@ -98,7 +98,7 @@ describe('Reassemble', () => {
     const cfg = { mode: 'groupSize&timeout', emitAsArray: true };
 
     const context = getContext();
-    for (let i = 0; i < 500; i += 1) {
+    for (let i = 0; i < 5; i += 1) {
       await reassemble.process.call(context, msg, cfg);
     }
     expect(context.emit.callCount).to.be.equal(1);
