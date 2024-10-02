@@ -4,7 +4,7 @@
   "scripts": {
     "audit": "better-npm-audit audit --level high --production",
     "pretest": "eslint split.js lib spec --fix",
-    "test": "mocha spec/split spec/splitOnJsonata spec/"
+    "test": "LOG_OUTPUT_MODE='short' mocha spec/*/*.spec.js --timeout 60000000 --exit"
   },
   "repository": {
     "type": "git",
@@ -16,10 +16,10 @@
     "node": "18.x"
   },
   "dependencies": {
-    "@elastic.io/component-commons-library": "3.2.0",
-    "@elastic.io/maester-client": "5.0.2",
+    "@elastic.io/component-commons-library": "3.2.1",
+    "@elastic.io/maester-client": "5.0.3",
     "elasticio-node": "0.0.9",
-    "elasticio-sailor-nodejs": "2.7.2",
+    "elasticio-sailor-nodejs": "2.7.3",
     "lodash": "4.17.21",
     "uuid": "9.0.1"
   },
@@ -34,8 +34,8 @@
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-airbnb-base": "14.2.0",
     "eslint-plugin-import": "2.29.1",
-    "mocha": "10.0.0",
+    "mocha": "10.7.3",
     "nock": "12.0.3",
-    "sinon": "9.0.3"
+    "sinon": "19.0.2"
   }
 }
