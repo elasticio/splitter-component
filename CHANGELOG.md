@@ -1,4 +1,4 @@
-## 1.5.0 (May 29, 2024)
+## 1.5.1 (October 16, 2024)
 * Fixed memory leak in `Re-assembled message` action, when you have more than 1 000 000 messages
 
 ## 1.5.0 (May 29, 2024)
