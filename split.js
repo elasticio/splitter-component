@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { messages } = require('elasticio-node');
+const { messages } = require('./lib/utils');
 
 /** @this processAction */
 async function processAction(msg, conf) {

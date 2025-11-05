@@ -1,3 +1,12 @@
+## 1.6.0 (November 05, 2025)
+*   Fixed a sporadic race condition in the "Re-assemble Messages" action that could cause a `404` error when a group was emitted. See [issue #105](https://github.com/elasticio/splitter-component/issues/105).
+*   Added unit tests to cover the race condition and prevent future regressions.
+*   Added a unit test to verify the `MAX_LOCAL_STORAGE_SIZE` overload protection.
+*   Updated major dependencies: `@elastic.io/component-commons-library` to `4.0.0` and `@elastic.io/maester-client` to `6.0.0`.
+*   Updated `elasticio-sailor-nodejs` to `2.7.6`.
+*   Updated Node.js engine to version `24.x`.
+*   Refactored `messages` import to use a local utility instead of `elasticio-node`.
+
 ## 1.5.1 (October 16, 2024)
 * Fixed memory leak in `Re-assembled message` action, when you have more than 1 000 000 messages
 
