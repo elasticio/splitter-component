@@ -1,4 +1,4 @@
-## 1.6.0 (November 03, 2025)
+## 1.6.0 (November 05, 2025)
 *   Fixed a sporadic race condition in the "Re-assemble Messages" action that could cause a `404` error when a group was emitted. See [issue #105](https://github.com/elasticio/splitter-component/issues/105).
 *   Added unit tests to cover the race condition and prevent future regressions.
 *   Added a unit test to verify the `MAX_LOCAL_STORAGE_SIZE` overload protection.
