@@ -1,3 +1,6 @@
+## 1.6.1 (January 05, 2026)
+*   Updated `elasticio-sailor-nodejs` to `2.7.7`.
+
 ## 1.6.0 (November 05, 2025)
 *   Fixed a sporadic race condition in the "Re-assemble Messages" action that could cause a `404` error when a group was emitted. See [issue #105](https://github.com/elasticio/splitter-component/issues/105).
 *   Added unit tests to cover the race condition and prevent future regressions.
