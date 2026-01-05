@@ -1,4 +1,4 @@
-## 1.6.1 (December 03, 2025)
+## 1.6.1 (January 05, 2026)
 *   Updated `elasticio-sailor-nodejs` to `2.7.7`.
 
 ## 1.6.0 (November 05, 2025)
